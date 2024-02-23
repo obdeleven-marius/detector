@@ -6,29 +6,21 @@
 </head>
 <body>
 
-  <!-- iframe used for attempting to load a custom protocol -->
-  <iframe style="display:none" height="0" width="0" id="loader"></iframe>
+  <!-- Hidden iframe for attempting to load a custom protocol -->
+  <iframe style="display:none" height="0" width="0" id="appLoader"></iframe>
 
   <!-- Button to trigger the redirection -->
   <button onclick="redirectToApp()">Redirect to App</button>
 
   <script>
     function redirectToApp() {
+        var iframe = document.getElementById('appLoader');
+        iframe.src = 'obdeleven://';
+
         setTimeout(function() {
+            // Fallback URL if the app is not installed
             window.location = "https://obdeleven.com";
         }, 25);
-
-        
-        var xhr = new XMLHttpRequest();
-
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState == 4 && xhr.status == 200) {
-                window.location = "obdeleven://";
-            }
-        }
-
-        xhr.open('head',exportUrl);
-        xhr.send(null);
     }
   </script>
 </body>
