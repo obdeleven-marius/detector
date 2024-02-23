@@ -14,28 +14,21 @@
 
   <script>
     function redirectToApp() {
-      // For desktop browser, remember to pass though any metadata on the link for deep linking
-      var fallbackLink = 'http://obdeleven.com'+window.location.search+window.location.hash;
+        setTimeout(function() {
+            window.location = "https://obdeleven.com";
+        }, 25);
 
-      // Simple device detection
-      var isiOS = navigator.userAgent.match('iPad') || navigator.userAgent.match('iPhone') || navigator.userAgent.match('iPod'),
-          isAndroid = navigator.userAgent.match('Android');
+        
+        var xhr = new XMLHttpRequest();
 
-      // Mobile
-      if (isiOS || isAndroid) {
-        // Load our custom protocol in the iframe, for Chrome and Opera this burys the error dialog (which is actually HTML)
-        // for iOS we will get a popup error if this protocol is not supported, but it won't block javascript
-        document.getElementById('loader').src = 'obdeleven://'+window.location.search+window.location.hash;
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4 && xhr.status == 200) {
+                window.location = "obdeleven://";
+            }
+        }
 
-        // Modify fallbackLink based on the device
-        //fallbackLink = isAndroid ? 'https://play.google.com/store/apps/details?id=com.mycompany.myapp' :
-        //                           'itms-apps://itunes.apple.com/app/my-app/idxxxxxxxx?mt=8' ;
-      }
-
-      // Now we just wait for everything to execute, if the user is redirected to your custom app
-      // the timeout below will never fire, if a custom app is not present (or the user is on the Desktop)
-      // we will replace the current URL with the fallbackLink (store URL or desktop URL as appropriate)
-      window.setTimeout(function (){ window.location.replace(fallbackLink); }, 1);
+        xhr.open('head',exportUrl);
+        xhr.send(null);
     }
   </script>
 </body>
