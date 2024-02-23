@@ -26,14 +26,12 @@
 
   <script>
     function redirectToApp() {
-
-        setTimeout(function() {
-            window.location = "https://obdeleven.com";
-        }, 25);
         try {
             window.location = "obdeleven://";
         } catch(error) {
             console.log(error)
+        } finally {
+            window.location = "https://obdeleven.com";
         }
     }
   </script>
