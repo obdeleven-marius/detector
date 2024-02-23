@@ -1,32 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Open App or Alert</title>
-<script>
-function openAppOrAlert() {
-    var appScheme = 'obdeleven://';
-    window.location.href = appScheme;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check App Installation</title>
+    <script>
+        async function checkAppInstalledAndOpen() {
+            try {
+                const relatedApps = await navigator.getInstalledRelatedApps();
+                let appIsInstalled = false;
 
-    // Fallback to an alert if the app is not opened after 2 seconds
-    var timeout = setTimeout(function() {
-        alert('App is not installed.');
-        // Optionally, redirect to the App Store here
-        // window.location.href = 'https://apps.apple.com/app/your-app-id';
-    }, 2000);
+                for (const app of relatedApps) {
+                    // Check if the related app is the one you're looking for
+                    // Adjust 'com.example.yourapp' to your app's id
+                    if (app.id === 'com.example.yourapp') {
+                        appIsInstalled = true;
+                        break;
+                    }
+                }
 
-    // Clear the timeout if the page is blurred, which indicates that the app was opened
-    window.onblur = function() {
-        clearTimeout(timeout);
-        window.onblur = null;
-    };
-}
-</script>
+                if (appIsInstalled) {
+                    // Open your app if it's installed
+                    window.location.href = 'yourapp://';
+                } else {
+                    // Fallback if the app is not installed
+                    alert('App is not installed.');
+                    // Optionally, redirect to the App Store or Play Store
+                    // window.location.href = 'https://yourappstorelink';
+                }
+            } catch (error) {
+                console.error('Error checking installed apps', error);
+                alert('Unable to check if app is installed.');
+            }
+        }
+    </script>
 </head>
 <body>
 
-<button id="openAppButton" onclick="openAppOrAlert()">Open OBDeleven</button>
+<button id="checkAppButton" onclick="checkAppInstalledAndOpen()">Check App Installation</button>
 
 </body>
 </html>
