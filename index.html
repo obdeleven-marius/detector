@@ -5,33 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check App Installation</title>
     <script>
-        async function checkAppInstalledAndOpen() {
-            try {
-                const relatedApps = await navigator.getInstalledRelatedApps();
-                let appIsInstalled = false;
-
-                for (const app of relatedApps) {
-                    // Check if the related app is the one you're looking for
-                    // Adjust 'com.example.yourapp' to your app's id
-                    if (app.id === 'com.example.yourapp') {
-                        appIsInstalled = true;
-                        break;
-                    }
-                }
-
-                if (appIsInstalled) {
-                    // Open your app if it's installed
-                    window.location.href = 'yourapp://';
-                } else {
-                    // Fallback if the app is not installed
-                    alert('App is not installed.');
-                    // Optionally, redirect to the App Store or Play Store
-                    // window.location.href = 'https://yourappstorelink';
-                }
-            } catch (error) {
-                console.error('Error checking installed apps', error);
-                alert('Unable to check if app is installed.');
-            }
+        function checkAppInstalledAndOpen() {
+            setTimeout(function () { window.location = "https://www.obdeleven.com"; }, 25);
+            window.location = "obdeleven://";
         }
     </script>
 </head>
