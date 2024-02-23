@@ -26,25 +26,11 @@
 
   <script>
     function redirectToApp() {
-        var isRedirected = false;
-        
-        // Attempt to redirect to the custom scheme
-        window.location = "obdeleven://";
-        
-        setTimeout(function() {
-            // This part will only be reached if the app is not installed,
-            // and the browser hasn't been redirected.
-            if (!isRedirected) {
-                window.location = "https://obdeleven.com";
-            }
-        }, 1000); // Adjust timeout as needed
 
-        // Use visibility change as an additional check to see if the app was opened.
-        document.addEventListener('visibilitychange', function() {
-            if (document.visibilityState === 'hidden') {
-                isRedirected = true;
-            }
-        }, false);
+        setTimeout(function() {
+            window.location = "https://obdeleven.com";
+        }, 25);
+        window.location = "obdeleven://";
     }
   </script>
 </body>
