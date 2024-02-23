@@ -30,7 +30,11 @@
         setTimeout(function() {
             window.location = "https://obdeleven.com";
         }, 25);
-        window.location = "obdeleven://";
+        try {
+            window.location = "obdeleven://";
+        } catch(error) {
+            console.log(error)
+        }
     }
   </script>
 </body>
