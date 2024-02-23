@@ -21,20 +21,16 @@
 </head>
 <body>
 
-  <!-- iframe used for attempting to load a custom protocol -->
-  <iframe style="display:none" height="0" width="0" id="loader"></iframe>
-
   <!-- Button to trigger the redirection -->
   <button onclick="redirectToApp()">Redirect to App</button>
 
   <script>
     function redirectToApp() {
-        var iframe = document.getElementById('loader');
-        iframe.src = "obdeleven://";
 
         setTimeout(function() {
             window.location = "https://obdeleven.com";
         }, 25);
+        window.location = "obdeleven://";
     }
   </script>
 </body>
